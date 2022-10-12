@@ -1,54 +1,25 @@
 import { Icon, Text, TextField } from '@shopify/polaris';
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ADD_DETAILS, Clear, Search } from '../Redux/Reducer';
+import { Clear, Search } from '../Redux/Reducer';
 import { SearchMinor } from '@shopify/polaris-icons';
 import SearchCard from './SearchCard';
 import '../App.css'
-// import { useFetch } from '../Custom Hooks/useFetch';
+import { AddDetails } from '../Redux/Actions';
 
 const HomePage = () => {
 
     const state = useSelector(state => state);
     const dispatch = useDispatch();
-    // const [results, setResult] = useFetch('https://api.github.com/users');
-    // Fetching Data from API
-    const fetchData = useCallback(() => {
-
-        if (state.userName !== '') {
-            fetch(`https://api.github.com/users/${state.userName}`, {
-                headers: {
-                    Authorization: "Bearer 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 "
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        dispatch({
-                            type: ADD_DETAILS, payload: []
-                        })
-                       alert(`user ${data.message}`)
-                    }
-                    else {
-                        dispatch({
-                            type: ADD_DETAILS, payload: [data]
-                        })
-                    }
-                })
-        } else {
-            dispatch({
-                type: ADD_DETAILS, payload: []
-            })
-        }
-    }, [state.userName, dispatch])
 
     useEffect(() => {
 
-        const fetch = setTimeout(() => fetchData(), 350)
+        if (state.userName !== '') {
+            const fetch = setTimeout(() => dispatch(AddDetails(state.userName)), 450)
+            return () => clearTimeout(fetch);
+        }
 
-        return () => clearTimeout(fetch);
-
-    }, [fetchData])
+    }, [dispatch, state.userName])
 
 
 

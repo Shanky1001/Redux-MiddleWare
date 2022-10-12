@@ -1,7 +1,7 @@
 
 
 const initialState = {
-    users: [], userName: ''
+    users: [], userName: '' || sessionStorage.getItem('userName')
 }
 
 export const ADD_DETAILS = 'Add User Details'
