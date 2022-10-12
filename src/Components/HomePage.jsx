@@ -1,11 +1,12 @@
 import { Icon, Text, TextField } from '@shopify/polaris';
-import React, { useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Clear, Search } from '../Redux/Reducer';
 import { SearchMinor } from '@shopify/polaris-icons';
-import SearchCard from './SearchCard';
+// import SearchCard from './SearchCard';
 import '../App.css'
 import { AddDetails } from '../Redux/Actions';
+const SearchCard = lazy(() => import('./SearchCard'))
 
 const HomePage = () => {
 
@@ -35,8 +36,11 @@ const HomePage = () => {
                 onClearButtonClick={() => dispatch({ type: Clear })} />
 
             {state.users.length !== 0 && state.users.map((val) => {
-                return <SearchCard val={val} key={val.id} />
+                return <Suspense fallback={<div style={{color:"white"}}> Loading ... </div>}>
+                    <SearchCard val={val} key={val.id} />
+                </Suspense>
             })}
+
 
         </div>
     )
