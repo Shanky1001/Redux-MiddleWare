@@ -3,7 +3,6 @@ import React, { lazy, Suspense, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Clear, Search } from '../Redux/Reducer';
 import { SearchMinor } from '@shopify/polaris-icons';
-// import SearchCard from './SearchCard';
 import '../App.css'
 import { AddDetails } from '../Redux/Actions';
 const SearchCard = lazy(() => import('./SearchCard'))
@@ -15,14 +14,13 @@ const HomePage = () => {
 
     useEffect(() => {
 
+        //  Applying Middleware (Thunk to fetch data)
         if (state.userName !== '') {
             const fetch = setTimeout(() => dispatch(AddDetails(state.userName)), 450)
             return () => clearTimeout(fetch);
         }
 
     }, [dispatch, state.userName])
-
-
 
     return (
         <div className="homepageContainer">
@@ -36,7 +34,7 @@ const HomePage = () => {
                 onClearButtonClick={() => dispatch({ type: Clear })} />
 
             {state.users.length !== 0 && state.users.map((val) => {
-                return <Suspense fallback={<div style={{color:"white"}}> Loading ... </div>}>
+                return <Suspense fallback={<div style={{ color: "white", textAlign: 'center', marginTop: '3rem' }}> Loading ... </div>}>
                     <SearchCard val={val} key={val.id} />
                 </Suspense>
             })}

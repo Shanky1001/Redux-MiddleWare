@@ -10,7 +10,7 @@ import DetailsPage from './Components/DetailsPage';
 
 function App() {
 
-  
+
   return (
     <div className="App">
       <Provider store={Store}>

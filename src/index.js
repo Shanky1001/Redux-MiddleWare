@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-// import App from './App';
 const App = lazy(()=>import('./App'))
 
 
