@@ -1,11 +1,11 @@
 import { Icon, Text, TextField } from '@shopify/polaris';
-import React, { lazy, Suspense, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { lazy, Suspense, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Clear, Search } from '../Redux/Reducer';
 import { SearchMinor } from '@shopify/polaris-icons';
-import '../App.css'
+import '../App.css';
 import { AddDetails } from '../Redux/Actions';
-const SearchCard = lazy(() => import('./SearchCard'))
+const SearchCard = lazy(() => import('./SearchCard'));
 
 const HomePage = () => {
 
